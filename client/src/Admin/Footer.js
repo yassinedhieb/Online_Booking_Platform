@@ -1,13 +1,49 @@
 import React from 'react';
-import { MDBFooter, MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBFooter, MDBBtn, MDBIcon,MDBListGroupItem,MDBListGroup } from 'mdbreact';
 
 const Footer = () => {
     return (
-        <MDBFooter color="blue" className="text-center font-small darken-2 ">
-            <div className="pt-4">
-                <MDBBtn outline color="white" tag="a" href="https://mdbootstrap.com/docs/react/getting-started/download/" target="_blank">Download MDB<MDBIcon icon="download" className="ml-2"/></MDBBtn>
-                <MDBBtn outline color="white" tag="a" href="https://mdbootstrap.com/docs/react/getting-started/quick-start/" target="_blank">Start free tutorial<MDBIcon icon="graduation-cap" className="ml-2"/></MDBBtn>
-                <hr className="my4"/>
+        <MDBFooter color="blue" className="text-center font-small darken-2">
+            <div style={{display:"flex",justifyContent:"space-around"}}>
+            <div style={{display:"flex",justifyContent:"column" }}>
+            <ul>
+                <li style={{listStyle:"none",fontSize:"200%"}}>About</li>
+                <li style={{listStyle:"none"}}>How Airbnb works</li>
+                <li style={{listStyle:"none"}}>Newsroom</li>
+                <li style={{listStyle:"none"}}>Airbnb Plus</li>
+                <li style={{listStyle:"none"}}>Airbnb Luxe</li>
+                <li style={{listStyle:"none"}}>HotelTonight</li>
+                <li style={{listStyle:"none"}}>Airbnb for Work</li>
+                <li style={{listStyle:"none"}}>Olympics</li>
+                <li style={{listStyle:"none"}}>Careers</li>
+            </ul>
+            </div>
+            <div style={{display:"flex",justifyContent:"column" }}>
+            <ul>
+                <li style={{listStyle:"none",fontSize:"200%"}}>About</li>
+                <li style={{listStyle:"none"}}>How Airbnb works</li>
+                <li style={{listStyle:"none"}}>Newsroom</li>
+                <li style={{listStyle:"none"}}>Airbnb Plus</li>
+                <li style={{listStyle:"none"}}>Airbnb Luxe</li>
+                <li style={{listStyle:"none"}}>HotelTonight</li>
+                <li style={{listStyle:"none"}}>Airbnb for Work</li>
+                <li style={{listStyle:"none"}}>Olympics</li>
+                <li style={{listStyle:"none"}}>Careers</li>
+            </ul>
+            </div>
+            <div style={{display:"flex",justifyContent:"column" }}>
+            <ul>
+                <li style={{listStyle:"none",fontSize:"200%"}}>About</li>
+                <li style={{listStyle:"none"}}>How Airbnb works</li>
+                <li style={{listStyle:"none"}}>Newsroom</li>
+                <li style={{listStyle:"none"}}>Airbnb Plus</li>
+                <li style={{listStyle:"none"}}>Airbnb Luxe</li>
+                <li style={{listStyle:"none"}}>HotelTonight</li>
+                <li style={{listStyle:"none"}}>Airbnb for Work</li>
+                <li style={{listStyle:"none"}}>Olympics</li>
+                <li style={{listStyle:"none"}}>Careers</li>
+            </ul>
+            </div>
             </div>
             <div className="pb-4">
                 <MDBIcon fab icon="facebook" className="mr-3"/>

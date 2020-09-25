@@ -83,6 +83,7 @@ import PropTypes from 'prop-types';
      }
 
      render(){
+         console.log('hello additem')
          return (        
                  <Form onSubmit ={this.onSubmit}>
                         <FormGroup>

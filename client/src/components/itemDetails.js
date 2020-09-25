@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getItems,deleteItem} from '../actions/itemActions'
 import PropTypes from 'prop-types';
+import Weather from './Weather/Weather'
 
 class itemDetails extends Component{
   constructor(props) {
@@ -63,7 +64,7 @@ class itemDetails extends Component{
             <UncontrolledCarousel items={this.images}/>
             </div>
             {items.filter(el => el._id==this.state.ID).map(el =>
-            <Card style={{marginTop:'50px'}}>
+            <Card style={{marginTop:'100px'}}>
                 
                 {/* <div style={{display:'flex',flexDirection:'row',flexWrap:'nowrap',width:'950px',height:'500px'}}>
                         <CardImg top width="100%" src="https://a0.muscache.com/im/pictures/be088744-346c-4b1a-91d1-48897e574aac.jpg?im_w=960"/>
@@ -73,10 +74,13 @@ class itemDetails extends Component{
               <CardBody>
                 <CardTitle>{el.maison_dhote}</CardTitle>
                 <CardSubtitle>Card subtitle</CardSubtitle>
-                <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                <CardText>{el.num? `Num:${el.num}`:null},{el.email? `Email:${el.email}`:null}.</CardText>
                 <Button>Button</Button>
               </CardBody>
+              <Weather city={el.governorate}/>
             </Card>)}
+            
+            
         </div>       
         );
       }

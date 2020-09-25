@@ -1,51 +1,41 @@
-import {
-    GET_MESSAGE_SUCCESS,
-    GET_MESSAGE_FAILED,
-    SAVE_MESSAGE_SUCCESS, 
-    SAVE_MESSAGE_FAILED, 
-    LOADING
-} from '../actions/saveMessageActions'
 
-const initialState = {
-    item: [],
-    error: "",
-    loading: false
+import {GET_ITEMS,DELETE_ITEM,ADD_ITEM,ITEMS_LOADING,EDIT_ITEM,ADD_MESSAGE} from '../actions/types';
+
+const initialState={
+    items:[],
+    loading:false
 }
 
-export default function saveMessageReducer(state=initialState, action){
+export default function(state=initialState,action){
     switch(action.type){
-
-        case GET_MESSAGE_SUCCESS:
+            // case GET_ITEMS:
+            //     return {
+            //         ...state,
+            //         items:action.payload,
+            //         loading:false
+            //     }
+            // case DELETE_ITEM:
+            //     return {
+            //     ...state,
+            //     items:state.items.filter(item=>item._id!==action.payload)
+            // };
+        //    case EDIT_ITEM:
+        //     return {
+        //        ...state,
+        //        items:state.items.filter(item=>item._id!==action.payload)
+        //    };
+           
+           case ADD_MESSAGE:
             return {
-                ...state,
-                loading: false,
-                item: action.item
-            }
-        
-        case GET_MESSAGE_FAILED:
+               ...state,
+               items:[action.payload,...state.items]
+           };
+           case ITEMS_LOADING:
             return {
-                ...state,
-                loading: false,
-                error: action.error
-            }
-
-        case SAVE_MESSAGE_SUCCESS:
-            return {
-                ...state,
-                loading: false
-            }
-        case SAVE_MESSAGE_FAILED:
-            return {
-                ...state,
-                error: action.error,
-                loading: false
-            }
-        case LOADING:
-            return {
-                ...state,
-                loading: true
-            }
-        default:
-            return state;
+               ...state,
+               loading:true
+           };
+        default :
+         return state;
     }
 }

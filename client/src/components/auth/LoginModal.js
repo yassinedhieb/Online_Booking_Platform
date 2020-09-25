@@ -11,12 +11,21 @@ import {
     NavLink,
     Alert
 } from 'reactstrap';
-
+import {MDBRow,
+    MDBCol,
+    MDBCard,
+    MDBCardBody,
+    MDBModalFooter,
+    MDBIcon,
+    MDBCardHeader,
+    MDBBtn,
+    MDBInput} from 'mdbreact';
 
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import {login} from '../../actions/authActions';
 import{clearErrors} from '../../actions/errorActions';
+
 
 
  class LoginModal extends Component{
@@ -29,6 +38,7 @@ import{clearErrors} from '../../actions/errorActions';
 
     static propTypes={
         isAuthenticated:PropTypes.bool,
+        isAuthAdmin:PropTypes.bool,
         error:PropTypes.object.isRequired,
         login:PropTypes.func.isRequired,
         clearErrors:PropTypes.func.isRequired
@@ -41,7 +51,7 @@ import{clearErrors} from '../../actions/errorActions';
         })
     }
     componentDidUpdate(prevProps){
-        const {error,isAuthenticated} = this.props;
+        const {error,isAuthenticated,isAuthAdmin,auth} = this.props;
         if(error!==prevProps.error){
             //check for register error
             if(error.id==='LOGIN_FAIL'){
@@ -50,11 +60,14 @@ import{clearErrors} from '../../actions/errorActions';
                 this.setState({msg:null})
             }
         }
-        if(this.state.modal){
+        
             if(isAuthenticated){
-                this.toggle();
+                if(auth.user.role==="admin"){
+                    this.props.history.push('/admin')
+                }
+                else{this.props.history.push('/user')}
             }
-        }
+        
     }
 
      ;
@@ -71,23 +84,27 @@ import{clearErrors} from '../../actions/errorActions';
          //attempt login
          this.props.login(user)
          
+         
      };
 
      render (){
          return(
-             <div>
-                 <NavLink onClick={this.toggle} href="#">
-                     Login
-                 </NavLink>
-                 <Modal isOpen={this.state.modal}
-                     toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Login</ModalHeader>
-                    <ModalBody>
-         {this.state.msg ? (<Alert color='danger'>{this.state.msg}</Alert>):null}
+
+                <div style={{marginTop:"5%",marginBottom:"5%",marginLeft:"35%"}}>
+                <MDBRow>
+                <MDBCol md="6">
+                    <MDBCard>
+                        <MDBCardBody>
+                        <MDBCardHeader className="form-header deep-blue-gradient rounded">
+                        <h3 className="my-3">
+                        <MDBIcon icon="lock" /> Login:
+                        </h3>
+                        </MDBCardHeader>
+                    {this.state.msg ? (<Alert color='danger'>{this.state.msg}</Alert>):null}
                         <Form onSubmit ={this.onSubmit}>
                             <FormGroup>
                                 <Label for ='email'>Email</Label>
-                                <Input type='email'
+                                <MDBInput type='email'
                                 className='mb-3'
                                 name='email'
                                 id='email'
@@ -95,20 +112,26 @@ import{clearErrors} from '../../actions/errorActions';
                                 onChange={this.onChange}/>
 
                                 <Label for ='password'>password</Label>
-                                <Input type='password'
+                                <MDBInput type='password'
                                 name='password'
                                 className='mb-3'
                                 id='passwors'
                                 placeholder='password'
                                 onChange={this.onChange}/>
-                                <Button color="dark"
-                                style={{marginTop:'2rem'}} block>Login</Button>
+                                <MDBBtn
+                                color="light-blue"
+                                className="mb-3"
+                                type="submit"
+                                >
+                                Login
+                                </MDBBtn>
                             </FormGroup>
                         </Form>
-                    </ModalBody>
-                     
-                 </Modal>
-             </div>
+                        </MDBCardBody>
+                        </MDBCard>
+                    </MDBCol>
+                </MDBRow>
+                </div>
          )
      }
 
@@ -116,7 +139,8 @@ import{clearErrors} from '../../actions/errorActions';
 
  const mapStateToProps=state=>({
     isAuthenticated:state.auth.isAuthenticated,
-    error:state.error    
+    error:state.error,
+    auth:state.auth
 })
 
  export default connect(mapStateToProps,{login,clearErrors})(LoginModal)

@@ -1,87 +1,54 @@
-export const GET_MESSAGE_SUCCESS = "GET_MESSAGE_SUCCESS";
-export const GET_MESSAGE_FAILED = "GET_MESSAGE_FAILED";
+import { GET_ITEMS, DELETE_ITEM, ADD_ITEM,ITEMS_LOADING, EDIT_ITEM,ADD_MESSAGE } from './types';
+import axios from 'axios'
+import {tokenConfig} from './authActions';
+import {returnErrors} from './errorActions'
 
-export const SAVE_MESSAGE_SUCCESS = "SAVE_MESSAGE_SUCCESS";
-export const SAVE_MESSAGE_FAILED = "SAVE_MESSAGE_FAILED";
+// export const getItems=()=>dispatch=>{
+//     dispatch(setItemsLoaoding());
+//     axios
+//     .get(('/api/locations'))
+//     .then(res=>
+//         dispatch({
+//             type:GET_ITEMS,
+//             payload:res.data
+//         }))
+//         .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
+// }
+export const addMessage=({name,email,subject,content})=>dispatch=>{
+    const body =({name,email,subject,content})
+    console.log(body)
+    axios.post('/api/messages',body)
+    .then(res=>dispatch({
+        type:ADD_MESSAGE,
+        payload:res.data
+    }))
+    .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
+    window.location = '/user';
 
-export const LOADING = "LOADING";
+};
+// export const editItem=({sector,governorate,maison_dhote,num,email,website,image},id)=>dispatch=>{
+//     const body =({maison_dhote,sector,num,email,website,governorate,image})
+//     axios.put(`/api/locations/update/${id}`,body).then(res=>
+//         dispatch({
+//             type:EDIT_ITEM,
+//             payload:id
+//         }))
+//         .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
+//         window.location = '/searchItem';
+// };
+// export const deleteItem=(id)=>(dispatch,getState)=>{
+//     axios.delete(`/api/locations/${id}`,tokenConfig(getState)).then(res=>
+//         dispatch({
+//             type:DELETE_ITEM,
+//             payload:id
+//         }))
+//         .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
 
-//RETURN
-
-const getMessageSuccess = (item) => ({
-    type: GET_MESSAGE_SUCCESS,
-    item: item
-})
-
-const getMessageFailed = (error) => ({
-    type: GET_MESSAGE_FAILED,
-    error: error
-})
-
-const saveMessageSuccess = () => ({
-    type: SAVE_MESSAGE_SUCCESS
-})
-
-const saveMessageFailed = (error) => ({
-    type: SAVE_MESSAGE_FAILED,
-    error: error
-})
-
-const loading = () => ({
-    type: LOADING
-})
-
-
-export const getMessage = ()=> {
-    console.log("getMessageAction request")
-    return dispatch => {
-        const getObject = {
-            method: "GET",
-            mode: "cors",
-            credentials: "include",
-            headers: {"Content-Type":"application/json"},
-        }
-
-        dispatch(loading()) 
-
-        fetch('/api/getMessages', getObject).then( response => {
-            if(response.ok){
-                response.json().then( resData => {
-                    dispatch(getMessageSuccess(resData))
-                })
-            }else{
-                dispatch(getMessageFailed("response is not ok"))
-            }
-        }).catch(err=>{ 
-            dispatch(getMessageFailed("Server not ok with "+ err))
-        })
-    }
-}
-
-export const saveMessage = ( item ) => {
-    console.log("saveMessage request")
-    return dispatch => {
-        const postObject = {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(item)
-        }
-        
-        dispatch(loading())
-
-        fetch('/api/saveMessage', postObject).then( response => {
-            if(response.ok){ 
-                dispatch(saveMessageSuccess())
-                alert("Your message saved well")
-            }else{
-                dispatch(saveMessageFailed("response error"))
-            }
-        }).catch( err => {
-            dispatch(saveMessageFailed("server error "+err))
-        })
-    }
-}
+// };
 
 
+export const setItemsLoaoding=()=>{
+    return {
+        type:ITEMS_LOADING
+    };
+};

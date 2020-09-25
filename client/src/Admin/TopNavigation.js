@@ -28,7 +28,7 @@ class TopNavigation extends Component {
                 <MDBCollapse isOpen = { this.state.collapse } navbar>
                     <MDBNavbarNav left>
                         <MDBNavItem active>
-                            <MDBNavLink to="#">Home</MDBNavLink>
+                            <MDBNavLink to={`${this.props.match.path}/addItem`}>Add Item</MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
                             <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="https://mdbootstrap.com/docs/react/" target="_blank">About MDB</a>

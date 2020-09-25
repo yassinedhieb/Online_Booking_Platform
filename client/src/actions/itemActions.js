@@ -14,6 +14,17 @@ export const getItems=()=>dispatch=>{
         }))
         .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
 }
+export const getItem=(id)=>dispatch=>{
+    dispatch(setItemsLoaoding());
+    axios
+    .get(`/api/locations/update/${id}`)
+    .then(res=>
+        dispatch({
+            type:GET_ITEMS,
+            payload:res.id
+        }))
+        .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
+}
 export const addItem=({sector,governorate,maison_dhote,num,email,website,image})=>dispatch=>{
     const body =({maison_dhote,sector,num,email,website,governorate,image})
     console.log(body)
@@ -34,7 +45,7 @@ export const editItem=({sector,governorate,maison_dhote,num,email,website,image}
             payload:id
         }))
         .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
-        window.location = '/searchItem';
+        window.location = '/user/searchItem';
 };
 export const deleteItem=(id)=>(dispatch,getState)=>{
     axios.delete(`/api/locations/${id}`,tokenConfig(getState)).then(res=>

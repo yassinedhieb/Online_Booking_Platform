@@ -17,7 +17,7 @@ const User = require('../../models/User');
 
 router.post('/',async (req,res)=>{
     console.log(req.body)
-    const {name,email,password}=req.body;
+    const {name,last_name,city,email,password,role}=req.body;
     ///validation
     if(!name||!email||!password){
         return res.status(400).json({msg:'please enter all fields'})
@@ -39,14 +39,18 @@ router.post('/',async (req,res)=>{
                     
                     const newUser= new User({
                         name,
+                        last_name,
+                        city,
                         email,
-                        password:hash
+                        password:hash,
+                        role,
+
                     })
-                   
+                    console.log(newUser)
                 newUser.save()
                 .then(result=>res.send(result))
                 .catch(er=>console.log(er))
-                console.log(newUser)
+                
         //   .then(client=>{
         //       jwt.sign(
         //           {id:client._id},config.get('jwtSecret'),

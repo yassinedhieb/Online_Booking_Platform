@@ -5,31 +5,27 @@ import SideNavigation from './sideNavigation copy';
 import Footer from './Footer';
 import { MDBContainer, MDBRow } from 'mdbreact';
 import { Container } from 'reactstrap';
+import AdminRoutes from './AdminRoutes';
 
 
 const AdminLayout = (props) => {
-    return (<> <SideNavigation />
+    return (
           
-          <>
+        <div>
          
          
          
-          <main id="content" className="p-10" >
-          <TopNavigation />
-          <MDBContainer>
+          
         {props.children}
-        </MDBContainer>
-      
-        </main>
-        <Footer />
+        
        
        
-        </>
+        </div>
          
         
        
        
-    </>  );
+      );
 }
  
 export default withRouter(AdminLayout);

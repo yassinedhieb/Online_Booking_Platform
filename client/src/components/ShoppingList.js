@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getItems,deleteItem} from '../actions/itemActions'
 import PropTypes from 'prop-types';
+import itemDetails from './itemDetails';
 
 class ShoppingList extends Component{
     state={
@@ -38,14 +39,19 @@ class ShoppingList extends Component{
         console.log(items)
         return (
         <div>    
-            <MDBCard className="my-5 px-5 pb-5">
-                <MDBCardBody className="text-center">
-                <div style={{backgroundImage:"url(https://cdn.pixabay.com/photo/2017/06/26/17/33/tunisia-2444524_960_720.jpg)",height:'400px',width:'900px', marginLeft:"180px" }}>
-                <h2 className="h1-responsive font-weight-bold text-center my-5" style={{paddingTop:'50px'}}> Prepare yourself for an adventure!</h2>
-                    <div style={{paddingTop:'20px', paddingLeft:'30px', paddingRight:'30px'}}>
+            
+                
+                <MDBView src="https://cdn.pixabay.com/photo/2017/06/26/17/33/tunisia-2444524_960_720.jpg">
+                <MDBMask overlay="indigo-slight" className="flex-center flex-column text-white text-center">
+                <h2> Prepare yourself for an adventure!</h2>
+                    {/* <div style={{paddingTop:'20px', paddingLeft:'30px', paddingRight:'30px'}}> */}
                 <Form.Control size="lg" type="text" placeholder="Search" width="100px" style={{borderRadius:"30px"}} onInput={this.handleSearch} />
-                    </div>
-                </div>
+                    {/* </div> */}
+                </MDBMask>
+                </MDBView>
+                <MDBCard className="my-5 px-5 pb-5">
+                <MDBCardBody className="text-center">
+                
         <br/>
         <MDBRow>
             {items.filter(el => el.maison_dhote.toUpperCase().includes(this.state.search.toUpperCase())).map(el =>
@@ -76,8 +82,10 @@ class ShoppingList extends Component{
                         <p className="dark-grey-text">
                         {el.email? `Email:${el.email}`:null}
                         </p>
-                        <MDBBtn href={el.website} color="pink" rounded size="md">
+                        <MDBBtn color="pink" rounded size="md">
+                        <Link to={"/user/itemDetails/"+el._id}>
                         Read more
+                        </Link>
                         </MDBBtn>
                         <MDBBtn color="danger" onClick={()=>this.onDeleteClick(el._id)} rounded size="md">
                         DELETE
@@ -86,7 +94,6 @@ class ShoppingList extends Component{
                     </MDBCol>
             )}
         </MDBRow>
-
         </MDBCardBody>
     </MDBCard>
     </div>        

@@ -1,22 +1,55 @@
 import React from "react";
 import { MDBRow, MDBCol, MDBCard, MDBCardBody, MDBIcon, MDBBtn, MDBInput } from "mdbreact";
+import { Form } from "reactstrap";
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
+import {addMessage} from '../actions/saveMessageActions';
+import{clearErrors} from '../actions/errorActions';
 
-const ContactPage = () => {
-  return (
+class Contact extends React.Component {
+  state={
+    name:"",
+    email:"",
+    subject:"",
+    content:""
+};
+static propTypes={
+    addMessage:PropTypes.func.isRequired
+}
+onChange=(e)=>{
+  this.setState({[e.target.name]:e.target.value})
+}
+onSubmit=(e)=>{
+  e.preventDefault();
+ //  const {name,email,password}=this.state;
+
+  //create user object
+  const newMessage={
+      name:this.state.name,
+      email:this.state.email,
+      subject:this.state.subject,
+      content:this.state.content
+  }
+  console.log(newMessage)
+  this.props.addMessage(newMessage);
+  alert("message submitted")
+};
+  render(){  
+    return (
     <section className="my-5">
       <h2 className="h1-responsive font-weight-bold text-center my-5">
         Contact us
       </h2>
-      <p className="text-center w-responsive mx-auto pb-5">
+      {/* <p className="text-center w-responsive mx-auto pb-5">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
         error amet numquam iure provident voluptate esse quasi, veritatis
         totam voluptas nostrum quisquam eum porro a pariatur veniam.
-      </p>
+      </p> */}
       <MDBRow>
         <MDBCol lg="5" className="lg-0 mb-4">
           <MDBCard>
             <MDBCardBody>
-              <div className="form-header blue accent-1">
+              <div >
                 <h3 className="mt-2">
                   <MDBIcon icon="envelope" /> Write to us:
                 </h3>
@@ -24,18 +57,24 @@ const ContactPage = () => {
               <p className="dark-grey-text">
                 We'll write rarely, but only the best content.
               </p>
+              <form onSubmit ={this.onSubmit}>
               <div className="md-form">
-                <MDBInput
-                  icon="user"
-                  label="Your name"
-                  iconClass="grey-text"
-                  type="text"
-                  id="form-name"
-                />
+              <MDBInput
+                icon='user'
+                value={this.state.name}
+                name='name'
+                onChange={this.onChange}
+                type='text'
+                id='materialFormRegisterNameEx'
+                label='First name'
+                required
+              />
               </div>
               <div className="md-form">
                 <MDBInput
                   icon="envelope"
+                  name='email'
+                  onChange={this.onChange}
                   label="Your email"
                   iconClass="grey-text"
                   type="text"
@@ -45,6 +84,8 @@ const ContactPage = () => {
               <div className="md-form">
                 <MDBInput
                   icon="tag"
+                  name='subject'
+                  onChange={this.onChange}
                   label="Subject"
                   iconClass="grey-text"
                   type="text"
@@ -54,6 +95,8 @@ const ContactPage = () => {
               <div className="md-form">
                 <MDBInput
                   icon="pencil-alt"
+                  onChange={this.onChange}
+                  name='content'
                   label="Icon Prefix"
                   iconClass="grey-text"
                   type="textarea"
@@ -61,8 +104,9 @@ const ContactPage = () => {
                 />
               </div>
               <div className="text-center">
-                <MDBBtn color="light-blue">Submit</MDBBtn>
+                <MDBBtn color="light-blue" onClick={this.onSubmit} >Submit</MDBBtn>
               </div>
+              </form>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
@@ -88,14 +132,14 @@ const ContactPage = () => {
               <MDBBtn tag="a" floating color="blue" className="accent-1">
                 <MDBIcon icon="map-marker-alt" />
               </MDBBtn>
-              <p>New York, 94126</p>
-              <p className="mb-md-0">United States</p>
+              <p>Sfax</p>
+              <p className="mb-md-0">Tunisia</p>
             </MDBCol>
             <MDBCol md="4">
               <MDBBtn tag="a" floating color="blue" className="accent-1">
                 <MDBIcon icon="phone" />
               </MDBBtn>
-              <p>+ 01 234 567 89</p>
+              <p>+216 27812935</p>
               <p className="mb-md-0">Mon - Fri, 8:00-22:00</p>
             </MDBCol>
             <MDBCol md="4">
@@ -103,13 +147,19 @@ const ContactPage = () => {
                 <MDBIcon icon="envelope" />
               </MDBBtn>
               <p>info@gmail.com</p>
-              <p className="mb-md-0">sale@gmail.com</p>
+              <p className="mb-md-0">yassine.dhieb@enis.tn</p>
             </MDBCol>
           </MDBRow>
         </MDBCol>
       </MDBRow>
     </section>
   );
+  }
 }
 
-export default ContactPage;
+const mapStateToProps=state=>({
+  messgae:state.messgae,
+  error:state.error    
+})
+
+export default connect(mapStateToProps,{addMessage})(Contact)

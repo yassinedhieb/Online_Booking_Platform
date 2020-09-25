@@ -19,6 +19,7 @@ mongoose.connect(db,{ useNewUrlParser: true, useUnifiedTopology: true }
 app.use('/api/locations',require('./routes/api/locations'))
 app.use('/api/users',require('./routes/api/users'))
 app.use('/api/auth',require('./routes/api/auth'))
+app.use('/api/messages',require('./routes/api/messages'))
 
 
 

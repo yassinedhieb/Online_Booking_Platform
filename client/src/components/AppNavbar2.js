@@ -49,7 +49,7 @@ render() {
                             <RegisterModel/>    
                         </MDBNavItem>
                         <MDBNavItem>
-                            <LoginModal/>
+                        <MDBNavLink to={`${this.props.match.path}/login`}>Login</MDBNavLink>
                         </MDBNavItem>
                     </MDBNavbarNav>
             </Fragment>)
@@ -63,11 +63,11 @@ render() {
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
             <MDBNavItem active>
-              <MDBNavLink to='/'>Home</MDBNavLink>
+              <MDBNavLink to={`${this.props.match.path}`}>Home</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to='/searchItem'>Search</MDBNavLink>
-            </MDBNavItem>
+            {/* <MDBNavItem>
+              <MDBNavLink to={`${this.props.match.path}/searchItem`}>Search</MDBNavLink>
+            </MDBNavItem> */}
             {isAuthenticated? authLinks:guestLinks}
             <MDBNavItem>
               <MDBDropdown>
@@ -84,6 +84,9 @@ render() {
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
+            <MDBNavItem>
+              <MDBNavLink to={`${this.props.match.path}/contact`}>Contact Us</MDBNavLink>
+            </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink className="waves-effect waves-light" to="#!">
                 <MDBIcon fab icon="twitter" />

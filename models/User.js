@@ -8,6 +8,14 @@ const UserSchema=new Schema({
         type:String,
         required:true
     },
+    last_name:{
+        type:String,
+        required:true
+    },
+    city:{
+        type:String,
+        required:true
+    },
     email:{
         type:String,
         required:true
@@ -19,6 +27,10 @@ const UserSchema=new Schema({
     register_date:{
         type:Date,
         default:Date.now
+    },
+    role:{
+        type:String,
+        default:"client"
     }
 })
 

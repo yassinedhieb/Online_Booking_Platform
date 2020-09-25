@@ -9,7 +9,10 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    ADMIN_REGISTER_FAIL,
+    ADMIN_REGISTER_SUCCESS,
+    ADMIN_LOGIN_SUCCESS
 } from './types'
 
 //check token and load user
@@ -33,7 +36,7 @@ export const loadUser=()=>(dispatch,getState)=>{
 }
 //Register User
 
-export const register=({name,email,password})=>dispatch=>{
+export const register=({name,last_name,city,email,password})=>dispatch=>{
     //headers
     const config={
         headers:{
@@ -42,7 +45,7 @@ export const register=({name,email,password})=>dispatch=>{
     }
     //request body
     const body =JSON.stringify({
-        name,email,password
+        name,last_name,city,email,password
     })
     axios.post('/api/users',body, config)
     .then(res=>dispatch({
@@ -53,6 +56,29 @@ export const register=({name,email,password})=>dispatch=>{
          dispatch(returnErrors(err.response.data,err.response.status,'REGISTER_FAIL'));
          dispatch({
              type:REGISTER_FAIL
+         });
+     });
+};
+export const registerAdmin=({name,last_name,city,email,password,role})=>dispatch=>{
+    //headers
+    const config={
+        headers:{
+            'Content-Type':'application/json'
+        }
+    }
+    //request body
+    const body =JSON.stringify({
+        name,last_name,city,email,password,role
+    })
+    axios.post('/api/users',body, config)
+    .then(res=>dispatch({
+        type:ADMIN_REGISTER_SUCCESS,
+        payload:res.data
+    }))
+    .catch(err=>{
+         dispatch(returnErrors(err.response.data,err.response.status,'ADMIN_REGISTER_FAIL'));
+         dispatch({
+             type:ADMIN_REGISTER_FAIL
          });
      });
 };
@@ -69,10 +95,13 @@ export const login=({email,password})=>dispatch=>{
         email,password
     })
     axios.post('/api/auth',body, config)
-    .then(res=>dispatch({
-        type:LOGIN_SUCCESS,
+    .then(res=>{if(res.data.role==="admin"){dispatch({
+        type:ADMIN_LOGIN_SUCCESS,
         payload:res.data
-    }))
+    })}else{dispatch({type:LOGIN_SUCCESS,
+        payload:res.data})}}
+    )
+    
     .catch(err=>{
          dispatch(returnErrors(err.response.data,err.response.status,'LOGIN_FAIL'));
          dispatch({
