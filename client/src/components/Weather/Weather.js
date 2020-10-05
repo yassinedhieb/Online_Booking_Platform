@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView,MDBBtn, MDBInput } from 'mdbreact';
 const api = {
   key: "0532382240bf757bb76a00817d8eed87",
@@ -6,19 +6,18 @@ const api = {
 }
 
 function App(props) {
-  const [query, setQuery] = useState('');
-  const [weather, setWeather] = useState({});
+  useEffect(()=>{
+    fetchItems();
+  },[]);
 
-  const search = evt => {
-    if (evt.key === "Enter") {
-      fetch(`${api.base}weather?q=${props.city}&units=metric&APPID=${api.key}`)
-        .then(res => res.json())
-        .then(result => {
-          setWeather(result);
-          setQuery('');
-          console.log(result);
-        });
-    }
+  const[weather,setweather]=useState([])
+
+  const fetchItems = async ()=> {
+    
+    const data= await fetch(`${api.base}weather?q=${props.city}&units=metric&APPID=${api.key}`)
+    const weather=await data.json();
+    console.log(weather)
+    setweather(weather)
   }
 
   const dateBuilder = (d) => {
@@ -36,8 +35,8 @@ function App(props) {
   return (
     <header>
       
-      <MDBView src="https://cdn.pixabay.com/photo/2017/12/02/06/25/prka-2992314_960_720.jpg">
-        <MDBMask overlay="indigo-slight" className="flex-center flex-column text-white text-center">
+      
+        <MDBMask className="flex-center flex-column text-white text-center">
         <div>
           {/* <MDBInput 
             type="text"
@@ -46,6 +45,8 @@ function App(props) {
             value={query}
             onKeyPress={search}
           /> */}
+          {console.log(props.city)}
+          {console.log(weather)}
         </div>
         {(typeof weather.main != "undefined") ? (
           <div>
@@ -56,7 +57,6 @@ function App(props) {
           </div>
           ) : ('')}
         </MDBMask>
-      </MDBView>
       
     </header>
   );

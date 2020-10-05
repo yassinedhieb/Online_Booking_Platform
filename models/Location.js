@@ -18,7 +18,9 @@ const LocationSchema=new Schema({
         default: ''},
     website:{type:String
         ,default: ''},
-    image:{type:String,default:''},
+    image: {
+        type: String,
+    },
     date:{
         type:Date,
         default:Date.now

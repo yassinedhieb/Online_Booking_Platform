@@ -34,10 +34,12 @@ import Footer from './components/GeneralFooter';
 import Login from "./components/Login"
 import Welcome2 from "./components/Welcome2";
 import PrivateRoutes from './Admin/PrivateRoutes';
+import PrivateRoutesH from './Host/PrivateRoutes'
 import Switch from 'react-bootstrap/esm/Switch';
 import LoginModal from './components/auth/LoginModal';
 import PropTypes from 'prop-types';
 import Weather from './components/Weather/Weather';
+import Calendar from './components/Calendar/Calendar.js'
 
 
 
@@ -66,6 +68,8 @@ class App extends Component {
       {/* <Route path="/" exact component={Carousel1}/> */}
       <Route path="/edit/:id" component={EditLocation} />
       <Route path="/newuser" component={NewUser} />
+      <Route path="/calendar" component={Calendar} />
+
       
      
       
@@ -83,7 +87,7 @@ class App extends Component {
       
       <Route path='/user' render={(props)=><UserLayout><UserRoutes {...props}/></UserLayout>}/>
       <Route path='/eventcreator' render={(props)=><EventCreatorLayout><EventCreatorRoutes {...props}/></EventCreatorLayout>}/>
-      <Route path='/host' render={(props)=><HostLayout><HostRoutes {...props}/></HostLayout>}/>
+      <PrivateRoutesH path='/host' render={(props)=><HostLayout><HostRoutes {...props}/></HostLayout>}/>
       <PrivateRoutes path='/admin' render={(props)=><AdminLayout><AdminRoutes {...props}/></AdminLayout>}/>
       <Route path="/weather" component={Weather}/>
 

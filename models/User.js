@@ -31,6 +31,9 @@ const UserSchema=new Schema({
     role:{
         type:String,
         default:"client"
+    },
+    ref:{
+        type:String
     }
 })
 

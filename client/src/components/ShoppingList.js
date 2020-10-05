@@ -7,11 +7,14 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getItems,deleteItem} from '../actions/itemActions'
 import PropTypes from 'prop-types';
-import itemDetails from './itemDetails';
+import itemDetails from '../components/itemDetails';
 
 class ShoppingList extends Component{
     state={
-        search:''
+        search:'',
+        governorate:'',
+        sector:''
+
     }
     static propTypes={
         getItems:PropTypes.func.isRequired,
@@ -47,14 +50,60 @@ class ShoppingList extends Component{
                     {/* <div style={{paddingTop:'20px', paddingLeft:'30px', paddingRight:'30px'}}> */}
                 <Form.Control size="lg" type="text" placeholder="Search" width="100px" style={{borderRadius:"30px"}} onInput={this.handleSearch} />
                     {/* </div> */}
+                
                 </MDBMask>
                 </MDBView>
                 <MDBCard className="my-5 px-5 pb-5">
                 <MDBCardBody className="text-center">
                 
         <br/>
+        
+                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
+                        <label>
+                            {" "}
+                            Filter Governorate
+                            <select
+                            className="form-control"
+                            onChange={(event) => {
+                                this.setState({governorate:event.target.value})
+                            }}
+                            >
+                            {console.log(this.state.governorate)}
+                            <option value="">All</option>
+                            <option value="Bizerte">Bizerte</option>
+                            <option value="Jandouba">Jandouba</option>
+                            <option value="Kairouan">Kairouan</option>
+                            {/* <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                            <option value="xxl">XXL</option> */}
+                            </select>
+                        </label>
+                        
+                    
+                        <label>
+                            {" "}
+                            Filter Governorate
+                            <select
+                            className="form-control"
+                            onChange={(event) => {
+                                this.setState({sector:event.target.value})
+                            }}
+                            >
+                            {console.log(this.state.governorate)}
+                            <option value="">All</option>
+                            <option value="Nord West">Nord West</option>
+                            <option value="Centre West">Centre West</option>
+                            {/* <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                            <option value="xxl">XXL</option> */}
+                            </select>
+                        </label>
+                   </div>
+                    
         <MDBRow>
-            {items.filter(el => el.maison_dhote.toUpperCase().includes(this.state.search.toUpperCase())).map(el =>
+            {items.filter(el => el.maison_dhote.toUpperCase().includes(this.state.search.toUpperCase())).filter(el => el.governorate.toUpperCase().includes(this.state.governorate.toUpperCase())).filter(el => el.sector.toUpperCase().includes(this.state.sector.toUpperCase())).map(el =>
                     <MDBCol lg="4" md="12" className="mb-lg-0 mb-4"  className="cardTag">
                         <MDBView hover className="rounded z-depth-2 mb-4" waves>
                         <img
@@ -87,10 +136,6 @@ class ShoppingList extends Component{
                         Read more
                         </Link>
                         </MDBBtn>
-                        <MDBBtn color="danger" onClick={()=>this.onDeleteClick(el._id)} rounded size="md">
-                        DELETE
-                        </MDBBtn>
-                        <Link to={"/edit/"+el._id}>edit</Link>
                     </MDBCol>
             )}
         </MDBRow>

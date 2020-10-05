@@ -9,6 +9,8 @@ import TopNavigation from './TopNavigation';
 import {connect}from'react-redux';
 import Footer from './Footer';
 import Profile from './Profile';
+import ShoppingList from './ShoppingList';
+import itemDetails from './itemDetails';
 
 const AdminRoutes = (props) => {
     console.log(props.isAuth)
@@ -20,9 +22,11 @@ const AdminRoutes = (props) => {
           <main id="content" className="p-10" >
           <Route path={`${props.match.path}`} component={TopNavigation}/>  
           <MDBContainer>
+          <Route path={`${props.match.path}/searchItem/:id`} component={itemDetails}/>
+          <Route path={`${props.match.path}/searchItem`} exact component={ShoppingList}/>
         <Route path={`${props.match.path}/addItem`} component={addItem}/>
         <Route path={`${props.match.path}/newadmin`} component={NewAdminRegister}/>
-        <Route path={`${props.match.path}`} component={Profile}/>
+        <Route path={`${props.match.path}`} exact component={Profile}/>
 
         </MDBContainer>
         
@@ -34,7 +38,7 @@ const AdminRoutes = (props) => {
 }
 const mapStateToProps=(state)=>{
     return {
-isAuth:state.auth.isAuthenticated
+isAuth:state.auth.isAuthAdmin
     }
 }
 

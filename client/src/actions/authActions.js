@@ -12,7 +12,11 @@ import {
     REGISTER_FAIL,
     ADMIN_REGISTER_FAIL,
     ADMIN_REGISTER_SUCCESS,
-    ADMIN_LOGIN_SUCCESS
+    ADMIN_LOGIN_SUCCESS,
+    HOST_REGISTER_FAIL,
+    HOST_REGISTER_SUCCESS,
+    HOST_LOGIN_SUCCESS
+
 } from './types'
 
 //check token and load user
@@ -95,11 +99,16 @@ export const login=({email,password})=>dispatch=>{
         email,password
     })
     axios.post('/api/auth',body, config)
-    .then(res=>{if(res.data.role==="admin"){dispatch({
+    .then(res=>{if(res.data.user.role==="admin"){dispatch({
         type:ADMIN_LOGIN_SUCCESS,
         payload:res.data
-    })}else{dispatch({type:LOGIN_SUCCESS,
-        payload:res.data})}}
+    })}
+    if(res.data.user.role==="host"){dispatch({
+        type:HOST_LOGIN_SUCCESS,
+        payload:res.data
+    })}
+    else{dispatch({type:LOGIN_SUCCESS,
+        payload:res.data})}{console.log(res.data.user.role)}{console.log(res.data.user.ref)} }
     )
     
     .catch(err=>{
@@ -108,6 +117,7 @@ export const login=({email,password})=>dispatch=>{
              type:LOGIN_FAIL
          });
      });
+     
 };
 //logout user
 export const logout =()=>{

@@ -25,10 +25,20 @@ export const getItem=(id)=>dispatch=>{
         }))
         .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
 }
-export const addItem=({sector,governorate,maison_dhote,num,email,website,image})=>dispatch=>{
-    const body =({maison_dhote,sector,num,email,website,governorate,image})
-    console.log(body)
-    axios.post('/api/locations',body)
+export const getItemForHost=(id)=>dispatch=>{
+    dispatch(setItemsLoaoding());
+    axios
+    .get(`/api/locations/${id}`)
+    .then(res=>
+        dispatch({
+            type:GET_ITEMS,
+            payload:res.id
+        }))
+        .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
+}
+export const addItem=(a)=>dispatch=>{
+    console.log(a)
+    axios.post('/api/locations',a)
     .then(res=>dispatch({
         type:ADD_ITEM,
         payload:res.data

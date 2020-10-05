@@ -14,7 +14,15 @@ import {
     ADMIN_AUTH_ERROR,
     ADMIN_LOGIN_FAIL,
     ADMIN_LOGOUT_SUCCESS,
-    ADMIN_REGISTER_FAIL
+    ADMIN_REGISTER_FAIL,
+    HOST_LOADING,
+    HOST_LOADED,
+    HOST_LOGIN_SUCCESS,
+    HOST_REGISTER_SUCCESS,
+    HOST_AUTH_ERROR,
+    HOST_LOGIN_FAIL,
+    HOST_LOGOUT_SUCCESS,
+    HOST_REGISTER_FAIL
 }from '../actions/types';
 import { bindActionCreators } from 'redux';
 
@@ -22,7 +30,10 @@ const initialState ={
     token:localStorage.getItem('token'),
     isAuthenticated:null,
     isAuthAdmin:null,
+    isAuthHost:null,
     isLoading:false,
+    role:null,
+    
     user:null
 }
 
@@ -59,7 +70,10 @@ export default function(state=initialState,action){
             token :null,
             user:null,
             isAuthenticated:false,
-            isLoading:false
+            isAuthHost:false,
+            role:null,
+            isLoading:false,
+            isAuthAdmin:false
         };
         
 
@@ -85,7 +99,8 @@ export default function(state=initialState,action){
                 ...state,
                 ...action.payload,
                 isAuthAdmin:true,
-                isLoading:false
+                isLoading:false,
+                isAuthenticated:true
             };
         case ADMIN_AUTH_ERROR:
         case ADMIN_LOGIN_FAIL:
@@ -97,7 +112,45 @@ export default function(state=initialState,action){
             token :null,
             admin:null,
             isAuthAdmin:false,
-            isLoading:false
+            isLoading:false,
+            role:null
+        };
+
+        //Host reducers
+        case HOST_LOADING:
+            return {
+                ...state,
+                isLoading:true
+            };
+        case HOST_LOADED:
+            return {
+                ...state,
+                isAuthHost:true,
+                isLoading:false,
+                host:action.payload
+            };
+        case HOST_LOGIN_SUCCESS:
+        case HOST_REGISTER_SUCCESS:
+        localStorage.setItem('token',action.payload.token)
+            return {
+                ...state,
+                ...action.payload,
+                isAuthHost:true,
+                isLoading:false,
+                isAuthenticated:true
+            };
+        case HOST_AUTH_ERROR:
+        case HOST_LOGIN_FAIL:
+        case HOST_LOGOUT_SUCCESS:
+        case HOST_REGISTER_FAIL:
+            localStorage.removeItem('token');
+        return {
+            ...state,
+            token :null,
+            host:null,
+            isAuthHost:false,
+            isLoading:false,
+            role:null
         };
         default:
             return state;

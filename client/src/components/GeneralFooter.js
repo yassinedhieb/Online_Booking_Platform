@@ -1,5 +1,6 @@
 import React from 'react';
-import { MDBFooter, MDBBtn, MDBIcon,MDBListGroupItem,MDBListGroup } from 'mdbreact';
+import { MDBFooter, MDBBtn, MDBIcon,MDBListGroupItem,MDBListGroup,MDBLink } from 'mdbreact';
+import {Link} from 'react-router-dom'
 
 const GFooter = () => {
     return (
@@ -8,40 +9,35 @@ const GFooter = () => {
             <div style={{display:"flex",justifyContent:"column" }}>
             <ul>
                 <li style={{listStyle:"none",fontSize:"200%"}}>About</li>
-                <li style={{listStyle:"none"}}>How Airbnb works</li>
-                <li style={{listStyle:"none"}}>Newsroom</li>
-                <li style={{listStyle:"none"}}>Airbnb Plus</li>
-                <li style={{listStyle:"none"}}>Airbnb Luxe</li>
-                <li style={{listStyle:"none"}}>HotelTonight</li>
-                <li style={{listStyle:"none"}}>Airbnb for Work</li>
-                <li style={{listStyle:"none"}}>Olympics</li>
-                <li style={{listStyle:"none"}}>Careers</li>
+                <li style={{listStyle:"none"}}><Link to="/user/aboutus">Who are We</Link></li>
+                <li style={{listStyle:"none"}}><Link to="/user/team">Team</Link></li>
+                <li style={{listStyle:"none"}}><Link to="/user/contact">Join the Team</Link></li>
+                <li style={{listStyle:"none"}}><Link to="/user/commitment">Commitment</Link></li>
             </ul>
             </div>
             <div style={{display:"flex",justifyContent:"column" }}>
             <ul>
-                <li style={{listStyle:"none",fontSize:"200%"}}>About</li>
-                <li style={{listStyle:"none"}}>How Airbnb works</li>
-                <li style={{listStyle:"none"}}>Newsroom</li>
-                <li style={{listStyle:"none"}}>Airbnb Plus</li>
-                <li style={{listStyle:"none"}}>Airbnb Luxe</li>
-                <li style={{listStyle:"none"}}>HotelTonight</li>
-                <li style={{listStyle:"none"}}>Airbnb for Work</li>
-                <li style={{listStyle:"none"}}>Olympics</li>
-                <li style={{listStyle:"none"}}>Careers</li>
+                <li style={{listStyle:"none",fontSize:"200%"}}>Community</li>
+                <li style={{listStyle:"none"}}>Partners</li>
+                <li style={{listStyle:"none"}}>Accessibilty</li>
+                <li style={{listStyle:"none"}}>Gift Cards</li>
             </ul>
             </div>
             <div style={{display:"flex",justifyContent:"column" }}>
             <ul>
-                <li style={{listStyle:"none",fontSize:"200%"}}>About</li>
-                <li style={{listStyle:"none"}}>How Airbnb works</li>
-                <li style={{listStyle:"none"}}>Newsroom</li>
+                <li style={{listStyle:"none",fontSize:"200%"}}>Host</li>
+                <li style={{listStyle:"none"}}>Host a home</li>
+                <li style={{listStyle:"none"}}>Host an Event</li>
                 <li style={{listStyle:"none"}}>Airbnb Plus</li>
-                <li style={{listStyle:"none"}}>Airbnb Luxe</li>
-                <li style={{listStyle:"none"}}>HotelTonight</li>
-                <li style={{listStyle:"none"}}>Airbnb for Work</li>
-                <li style={{listStyle:"none"}}>Olympics</li>
-                <li style={{listStyle:"none"}}>Careers</li>
+                <li style={{listStyle:"none"}}>Host Commitment</li>   
+            </ul>
+            </div>
+            <div style={{display:"flex",justifyContent:"column" }}>
+            <ul>
+                <li style={{listStyle:"none",fontSize:"200%"}}>Event Creator</li>
+                <li style={{listStyle:"none"}}>Become one</li>
+                <li style={{listStyle:"none"}}>What we Offer</li>
+                <li style={{listStyle:"none"}}>Your Commitment</li>   
             </ul>
             </div>
             </div>

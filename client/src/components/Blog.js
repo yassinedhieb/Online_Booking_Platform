@@ -6,14 +6,14 @@ const BlogPage = (props) => {
     <div>
     <MDBView src="https://cdn.pixabay.com/photo/2017/12/20/10/48/portugal-3029665_960_720.jpg">
           <MDBMask overlay="indigo-slight" className="flex-center flex-column text-center">
-          <button style={{height:"15%",fontSize:"300%",backgroundColor: "Transparent",
+          
+              <h1 style={{height:"15%",fontSize:"300%",backgroundColor: "Transparent",
                 width:"30%",color:"white",
                 borderColor:"white",
                 borderRadius:"30px",
                 marginTop:"10%"
-                }}>
-              <MDBNavLink to={`${props.match.path}/searchItem`}>Begin Exploring</MDBNavLink>
-          </button>
+                }}><MDBNavLink to={`${props.match.path}/searchItem`}>Begin Exploring!</MDBNavLink></h1>
+          
           </MDBMask>
     </MDBView>
     <MDBCard className="my-5 px-5 pb-5">

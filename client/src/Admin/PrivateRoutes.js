@@ -18,7 +18,7 @@ const PrivateRoutes = ({render:Component,isAuth,...rest}) => {
 }
 const mapStateToProps=(state)=>{
     return {
-isAuth:state.auth.isAuthenticated
+isAuth:state.auth.isAuthAdmin
     }
 }
  

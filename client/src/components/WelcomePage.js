@@ -27,8 +27,8 @@ class Welcome extends React.Component {
               <h2 style={{fontSize:'70px'}}>Let's get lost in Paradise</h2>
               <h4 style={{fontSize:'40px'}}>Please choose Your identity</h4>
               <div style={{display:'flex', flexDirection:'row',justifyContent:"space-around"}}>
-                {/* <MDBBtn gradient="purple"><Link to="/newuser">NewUser</Link></MDBBtn>
-                <MDBBtn gradient="purple"><Link to="/user">User</Link></MDBBtn>
+                <MDBBtn gradient="purple"><Link to="/newuser">NewUser</Link></MDBBtn>
+                {/* <MDBBtn gradient="purple"><Link to="/user">User</Link></MDBBtn>
                 <MDBBtn gradient="purple"><Link to="/admin">Admin</Link></MDBBtn> */}
                 <MDBBtn gradient="purple"><Link to="/login">Login</Link></MDBBtn>
                 {/* <MDBBtn gradient="blue">Event Creator</MDBBtn>

@@ -1,6 +1,18 @@
 const express = require('express');
 
 const router = express.Router();
+const multer=require('multer');
+const storage=multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,'../Project1 - Copie/client/public/image')
+    },
+    filename:(req,file,cb)=>{
+        cb(null,file.originalname)
+    }
+})
+const upload=multer({
+    storage:storage
+})
 
 const auth=require('../../Middleware/auth');
 
@@ -26,7 +38,7 @@ router.get('/:id',(req,res)=>{
 // create an location 
 // access Private
 
-router.post('/',(req,res)=>{
+router.post('/',upload.single('image'),(req,res)=>{
     const newLocation= new Location({
         sector:req.body.sector,
         governorate:req.body.governorate,
@@ -34,7 +46,7 @@ router.post('/',(req,res)=>{
         num:req.body.num,
         email:req.body.email,
         website:req.body.website,
-        image:req.body.image
+        image:req.file.originalname
 
     });
     console.log(newLocation)

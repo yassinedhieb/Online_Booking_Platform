@@ -30,17 +30,17 @@ class TopNavigation extends Component {
                         <MDBNavItem active>
                             <MDBNavLink to={`${this.props.match.path}/addItem`}>Add Item</MDBNavLink>
                         </MDBNavItem>
-                        <MDBNavItem>
-                            <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="https://mdbootstrap.com/docs/react/" target="_blank">About MDB</a>
+                        <MDBNavItem active>
+                            <MDBNavLink to={`${this.props.match.path}/searchItem`}>Items</MDBNavLink>
                         </MDBNavItem>
-                        <MDBNavItem>
-                            <a rel="noopener noreferrer" className="nav-link Ripple-parent" href="https://mdbootstrap.com/docs/react/getting-started/download/" target="_blank">Free download</a>
-                        </MDBNavItem>
-                        <MDBNavItem>
-                            <a rel="noopener noreferrer"  className="nav-link Ripple-parent" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">Free tutorials</a>
+                        <MDBNavItem active>
+                            <MDBNavLink to="/user">UI</MDBNavLink>
                         </MDBNavItem>
                     </MDBNavbarNav>
                     <MDBNavbarNav right>
+                        <MDBNavItem active>
+                            <MDBNavLink to={`${this.props.match.path}/newadmin`}>New Admin</MDBNavLink>
+                        </MDBNavItem>
                         <MDBNavItem>
                             <a className="nav-link navbar-link" rel="noopener noreferrer" target="_blank" href="https://pl-pl.facebook.com/mdbootstrap/"><MDBIcon fab icon="facebook" /></a>
                         </MDBNavItem>

@@ -39,10 +39,12 @@ import{clearErrors} from '../../actions/errorActions';
     static propTypes={
         isAuthenticated:PropTypes.bool,
         isAuthAdmin:PropTypes.bool,
+        isAuthHost:PropTypes.bool,
         error:PropTypes.object.isRequired,
         login:PropTypes.func.isRequired,
         clearErrors:PropTypes.func.isRequired
     };
+    
     toggle=()=>{
         //clear errors
         this.props.clearErrors();
@@ -51,7 +53,7 @@ import{clearErrors} from '../../actions/errorActions';
         })
     }
     componentDidUpdate(prevProps){
-        const {error,isAuthenticated,isAuthAdmin,auth} = this.props;
+        const {error,isAuthenticated,isAuthAdmin,auth,isAuthHost} = this.props;
         if(error!==prevProps.error){
             //check for register error
             if(error.id==='LOGIN_FAIL'){
@@ -60,13 +62,13 @@ import{clearErrors} from '../../actions/errorActions';
                 this.setState({msg:null})
             }
         }
-        
-            if(isAuthenticated){
-                if(auth.user.role==="admin"){
-                    this.props.history.push('/admin')
-                }
-                else{this.props.history.push('/user')}
-            }
+            ;
+            if(isAuthenticated&&!isAuthAdmin&&!isAuthHost)
+                        {this.props.history.push('/user')}   
+            if(isAuthHost&&!isAuthAdmin){
+                        this.props.history.push('/host')};    
+            if(isAuthAdmin&&isAuthenticated){
+                        this.props.history.push('/admin')}
         
     }
 
@@ -89,7 +91,7 @@ import{clearErrors} from '../../actions/errorActions';
 
      render (){
          return(
-
+            
                 <div style={{marginTop:"5%",marginBottom:"5%",marginLeft:"35%"}}>
                 <MDBRow>
                 <MDBCol md="6">
@@ -139,6 +141,8 @@ import{clearErrors} from '../../actions/errorActions';
 
  const mapStateToProps=state=>({
     isAuthenticated:state.auth.isAuthenticated,
+    isAuthAdmin:state.auth.isAuthAdmin,
+    isAuthHost:state.auth.isAuthHost,
     error:state.error,
     auth:state.auth
 })

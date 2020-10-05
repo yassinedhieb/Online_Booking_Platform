@@ -44,6 +44,7 @@ router.post('/',async (req,res)=>{
                         email,
                         password:hash,
                         role,
+                        ref:req.body.ref
 
                     })
                     console.log(newUser)

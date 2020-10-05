@@ -36,9 +36,6 @@ render() {
                 <MDBNavItem>
                     <Logout/>
                 </MDBNavItem>
-                <MDBNavItem>
-                    <MDBNavLink to="/addItem">Add Item</MDBNavLink>
-                </MDBNavItem>
             </MDBNavbarNav>
             </Fragment>
             );

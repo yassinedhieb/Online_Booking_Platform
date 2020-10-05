@@ -53,7 +53,7 @@ import PropTypes from 'prop-types';
     }
     onChangeImage=(e)=>{
         this.setState({
-            image:e.target.value
+            image:e.target.files[0]
         })
     }
     onChangeEmail=(e)=>{
@@ -68,18 +68,17 @@ import PropTypes from 'prop-types';
     }
      onSubmit=(e)=>{
          e.preventDefault()
-         const newLocation={
-            
-                sector:this.state.sector,
-                governorate:this.state.governorate,
-                maison_dhote:this.state.maison_dhote,
-                num:this.state.num,
-                email:this.state.email,
-                website:this.state.website,
-                image:this.state.image
-         }
+         let formdata= new FormData()
+         formdata.append('sector',this.state.sector)
+         formdata.append('governorate',this.state.governorate)
+         formdata.append('maison_dhote',this.state.maison_dhote)
+         formdata.append('num',this.state.num)
+         formdata.append('email',this.state.email)
+         formdata.append('website',this.state.website)
+         formdata.append('image',this.state.image)
+         
 
-         this.props.addItem(newLocation)
+         this.props.addItem(formdata)
      }
 
      render(){
@@ -112,7 +111,7 @@ import PropTypes from 'prop-types';
                             </FormGroup>
                             <FormGroup>
                             <Label for="image">Image</Label>
-                            <Input type="text" name="image" id="image" placeholder="Enter an image URL" onChange={this.onChangeImage} />
+                            <Input type="file" name="image" id="image" placeholder="Enter an image URL" onChange={this.onChangeImage} />
                             </FormGroup>
                         <Button>Submit</Button>
                     </Form>
