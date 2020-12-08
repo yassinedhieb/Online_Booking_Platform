@@ -44,18 +44,28 @@ export const addItem=(a)=>dispatch=>{
         payload:res.data
     }))
     .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
-    window.location = '/searchItem';
+    // window.location = '/newHost';
 
 };
-export const editItem=({sector,governorate,maison_dhote,num,email,website,image},id)=>dispatch=>{
-    const body =({maison_dhote,sector,num,email,website,governorate,image})
-    axios.put(`/api/locations/update/${id}`,body).then(res=>
+export const editItem=(a,id)=>dispatch=>{
+    console.log(a)
+    axios.put(`/api/locations/update/${id}`,a).then(res=>
         dispatch({
             type:EDIT_ITEM,
             payload:id
         }))
         .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
-        window.location = '/user/searchItem';
+        // window.location = '/host';
+};
+export const editItemHost=(a,id)=>dispatch=>{
+    console.log(a)
+    axios.put(`/api/locations/updateHost/${id}`,a).then(res=>
+        dispatch({
+            type:EDIT_ITEM,
+            payload:id
+        }))
+        .catch(err=>dispatch(returnErrors(err.response.data,err.response.status)))
+        // window.location = '/host';
 };
 export const deleteItem=(id)=>(dispatch,getState)=>{
     axios.delete(`/api/locations/${id}`,tokenConfig(getState)).then(res=>

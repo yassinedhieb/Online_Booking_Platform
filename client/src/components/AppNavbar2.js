@@ -62,6 +62,9 @@ render() {
             <MDBNavItem active>
               <MDBNavLink to={`${this.props.match.path}`}>Home</MDBNavLink>
             </MDBNavItem>
+            <MDBNavItem active>
+              <MDBNavLink to={`${this.props.match.path}/events`}>Events</MDBNavLink>
+            </MDBNavItem>
             {/* <MDBNavItem>
               <MDBNavLink to={`${this.props.match.path}/searchItem`}>Search</MDBNavLink>
             </MDBNavItem> */}
@@ -83,6 +86,9 @@ render() {
           <MDBNavbarNav right>
             <MDBNavItem>
               <MDBNavLink to={`${this.props.match.path}/contact`}>Contact Us</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+              <MDBNavLink to={`${this.props.match.path}/newLocation`}>Become a Host</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink className="waves-effect waves-light" to="#!">

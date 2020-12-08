@@ -12,7 +12,7 @@ const BlogPage = (props) => {
                 borderColor:"white",
                 borderRadius:"30px",
                 marginTop:"10%"
-                }}><MDBNavLink to={`${props.match.path}/searchItem`}>Begin Exploring!</MDBNavLink></h1>
+                }}><MDBNavLink to={`${props.match.path}/searchItem`}>Begin Exploring Locations!</MDBNavLink></h1>
           
           </MDBMask>
     </MDBView>

@@ -44,6 +44,7 @@ router.post('/',async (req,res)=>{
                         email,
                         password:hash,
                         role,
+                        state:req.body.state,
                         ref:req.body.ref
 
                     })

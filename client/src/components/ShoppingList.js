@@ -5,7 +5,7 @@ import {  MDBRow, MDBCol, MDBCard, MDBCardBody, MDBMask, MDBIcon, MDBView, MDBBt
 import {Link} from 'react-router-dom';
 
 import {connect} from 'react-redux';
-import {getItems,deleteItem} from '../actions/itemActions'
+import {getItems,deleteItem,editItem} from '../actions/itemActions'
 import PropTypes from 'prop-types';
 import itemDetails from '../components/itemDetails';
 
@@ -13,14 +13,16 @@ class ShoppingList extends Component{
     state={
         search:'',
         governorate:'',
-        sector:''
+        sector:'',
+        clicks:0
 
     }
     static propTypes={
         getItems:PropTypes.func.isRequired,
         item:PropTypes.object.isRequired,
         isAuthenticated:PropTypes.bool,
-        deleteItem:PropTypes.func.isRequired
+        deleteItem:PropTypes.func.isRequired,
+        editItem:PropTypes.func.isRequired
     }
 
     componentDidMount(id){
@@ -30,6 +32,22 @@ class ShoppingList extends Component{
     onDeleteClick=(id)=>{
         
         this.props.deleteItem(id)
+    }
+    onClicks=(e,id,sector,governorate,maison_dhote,num,email,website,clicks)=>{
+        e.preventDefault()
+        const newLocation={
+            sector:sector,
+            governorate:governorate,
+            maison_dhote:maison_dhote,
+            num:num,
+            email:email,
+            website:website,
+            clicks:clicks+1,            
+        }
+        console.log(newLocation)
+        
+     
+        this.props.editItem(newLocation,id)
     }
     handleSearch = (e) => {
         e.preventDefault()
@@ -41,9 +59,7 @@ class ShoppingList extends Component{
         const {items}=this.props.item;
         console.log(items)
         return (
-        <div>    
-            
-                
+        <div>      
                 <MDBView src="https://cdn.pixabay.com/photo/2017/06/26/17/33/tunisia-2444524_960_720.jpg">
                 <MDBMask overlay="indigo-slight" className="flex-center flex-column text-white text-center">
                 <h2> Prepare yourself for an adventure!</h2>
@@ -101,9 +117,9 @@ class ShoppingList extends Component{
                             </select>
                         </label>
                    </div>
-                    
+                   
         <MDBRow>
-            {items.filter(el => el.maison_dhote.toUpperCase().includes(this.state.search.toUpperCase())).filter(el => el.governorate.toUpperCase().includes(this.state.governorate.toUpperCase())).filter(el => el.sector.toUpperCase().includes(this.state.sector.toUpperCase())).map(el =>
+            {items.filter(el => el.maison_dhote.toUpperCase().includes(this.state.search.toUpperCase())).filter(el => el.governorate.toUpperCase().includes(this.state.governorate.toUpperCase())).filter(el => el.sector.toUpperCase().includes(this.state.sector.toUpperCase())).filter(el => el.state==="confirmed").map(el =>
                     <MDBCol lg="4" md="12" className="mb-lg-0 mb-4"  className="cardTag">
                         <MDBView hover className="rounded z-depth-2 mb-4" waves>
                         <img
@@ -116,7 +132,7 @@ class ShoppingList extends Component{
                         <a href="#!" className="pink-text">
                         <h6 className="font-weight-bold mb-3">
                             <MDBIcon icon="map" className="pr-2" />
-                            {el.governorate},{el.sector}
+                            {el.governorate},{el.sector},{el.clicks}
                         </h6>
                         </a>
                         <h4 className="font-weight-bold mb-3">
@@ -131,11 +147,13 @@ class ShoppingList extends Component{
                         <p className="dark-grey-text">
                         {el.email? `Email:${el.email}`:null}
                         </p>
-                        <MDBBtn color="pink" rounded size="md">
+                        
+                        <MDBBtn color="pink" rounded size="md" onClick={(e)=>this.onClicks(e,el._id,el.sector,el.governorate,el.maison_dhote,el.num,el.email,el.website,el.clicks)}>
                         <Link to={"/user/itemDetails/"+el._id}>
                         Read more
                         </Link>
                         </MDBBtn>
+                        
                     </MDBCol>
             )}
         </MDBRow>
@@ -153,4 +171,4 @@ const mapStateToProps=(state)=>({
     isAuthenticated:state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps,{getItems,deleteItem})(ShoppingList);
+export default connect(mapStateToProps,{getItems,deleteItem,editItem})(ShoppingList);

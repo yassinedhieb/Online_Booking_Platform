@@ -12,7 +12,7 @@ import {connect}from'react-redux';
 const PrivateRoutes = ({render:Component,isAuth,...rest}) => {
     console.log(isAuth)
     return ( 
-        <Route {...rest} render={(props)=>((isAuth)?<Component {...props} isAuth={isAuth}/>:<Redirect to ={{pathname:'/',state:{from:props.location}}}/>)}/>
+        <Route {...rest} render={(props)=>((!isAuth)?<Component {...props} isAuth={isAuth}/>:<Redirect to ={{pathname:'/',state:{from:props.location}}}/>)}/>
 
      );
 }

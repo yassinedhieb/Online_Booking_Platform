@@ -40,6 +40,12 @@ import LoginModal from './components/auth/LoginModal';
 import PropTypes from 'prop-types';
 import Weather from './components/Weather/Weather';
 import Calendar from './components/Calendar/Calendar.js'
+import Events from './components/Events/Events';
+import NewHostLocation from './components/NewHost/NewHostLocation';
+import NewHost from './components/NewHost/NewHost';
+import HostInvitations from './components/HostInvitations';
+import NewItemDetails from './components/NewItemDetails';
+import addevent from './components/AddEvent'
 
 
 
@@ -66,11 +72,14 @@ class App extends Component {
       {/* <Route  path='/' component={AppNavbar2}/> */}
         {/* <Route path="/" exact component={map}/> */}
       {/* <Route path="/" exact component={Carousel1}/> */}
-      <Route path="/edit/:id" component={EditLocation} />
+      {/* <Route path="/edit/:id" component={EditLocation} /> */}
       <Route path="/newuser" component={NewUser} />
       <Route path="/calendar" component={Calendar} />
+      <Route path="/hostinvitations" component={HostInvitations} />
+     
+      <Route path="/searchItem/:id" component={NewItemDetails}/>
 
-      
+      <Route path="/events" component={Events} />
      
       
       
@@ -79,8 +88,10 @@ class App extends Component {
       {/* <Route path="/welcome" component={Welcome2}/> */}
       <Container>  
       <Route path="/addItem" component={addItem}/>
+      <Route path="/addEvent" component={addevent}/>
+
+
       </Container> 
-      <Route path="/searchItem/:id" component={itemDetails}/>
      
       <Route path="/map" exact component={ContactPage}/>
       <Route path="/login" exact component={LoginModal}/>

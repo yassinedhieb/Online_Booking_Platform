@@ -32,7 +32,6 @@ export const loadUser=()=>(dispatch,getState)=>{
         payload:res.data
     }))
     .catch(err=>{
-        dispatch(returnErrors(err.response.data,err.response.status))
         dispatch({
             type:AUTH_ERROR
         });
@@ -143,3 +142,30 @@ export const tokenConfig=(getState)=>{
     }
     return config;
 }
+
+//Register Host
+
+export const registerHost=({name,last_name,city,email,password,ref,state,role})=>dispatch=>{
+    //headers
+    const config={
+        headers:{
+            'Content-Type':'application/json'
+        }
+    }
+    //request body
+    const body =JSON.stringify({
+        name,last_name,city,email,password,ref,state,role
+    })
+    axios.post('/api/users',body, config)
+    .then(res=>dispatch({
+        type:HOST_REGISTER_SUCCESS,
+        payload:res.data
+    }))
+    .catch(err=>{
+         dispatch(returnErrors(err.response.data,err.response.status,'HOST_REGISTER_FAIL'));
+         dispatch({
+             type:HOST_REGISTER_FAIL
+         });
+     });
+    //  window.location = '/user';
+};

@@ -46,7 +46,8 @@ router.post('/',upload.single('image'),(req,res)=>{
         num:req.body.num,
         email:req.body.email,
         website:req.body.website,
-        image:req.file.originalname
+        state:req.body.state,
+        clicks:req.body.clicks
 
     });
     console.log(newLocation)
@@ -54,12 +55,44 @@ router.post('/',upload.single('image'),(req,res)=>{
 })
 // find and update
 router.put('/update/:id',(req,res)=>{
-    Location.findByIdAndUpdate({_id:req.params.id},req.body)
+    const newLocation= {
+        sector:req.body.sector,
+        governorate:req.body.governorate,
+        maison_dhote:req.body.maison_dhote,
+        num:req.body.num,
+        email:req.body.email,
+        state:"confirmed",
+        website:req.body.website,
+        clicks:req.body.clicks
+
+    };
+    console.log(newLocation)
+    Location.findOneAndUpdate({_id:req.params.id},newLocation)
+    
         .then(()=>res.json("location udated"))
         .catch(err=>res.status(400).json("err"+err))
+        
     
 });
+router.put('/updateHost/:id',(req,res)=>{
+    const newLocation= {
+        sector:req.body.sector,
+        governorate:req.body.governorate,
+        maison_dhote:req.body.maison_dhote,
+        num:req.body.num,
+        email:req.body.email,
+        website:req.body.website,
+        state:"confirmed"
 
+    };
+    console.log(newLocation)
+    Location.findByIdAndUpdate({_id:req.params.id},newLocation)
+    
+        .then(()=>res.json("location udated"))
+        .catch(err=>res.status(400).json("err"+err))
+        
+    
+});
 // route DELETE api/locations
 // Get delete location 
 // access Private

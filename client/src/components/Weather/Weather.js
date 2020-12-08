@@ -16,7 +16,6 @@ function App(props) {
     
     const data= await fetch(`${api.base}weather?q=${props.city}&units=metric&APPID=${api.key}`)
     const weather=await data.json();
-    console.log(weather)
     setweather(weather)
   }
 
@@ -45,8 +44,11 @@ function App(props) {
             value={query}
             onKeyPress={search}
           /> */}
-          {console.log(props.city)}
-          {console.log(weather)}
+          {/* {console.log(props.city)}
+          {console.log(weather)} */}
+          <h1>
+            {props.maison_dhote}
+          </h1>
         </div>
         {(typeof weather.main != "undefined") ? (
           <div>

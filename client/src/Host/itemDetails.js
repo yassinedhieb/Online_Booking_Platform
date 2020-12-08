@@ -105,7 +105,18 @@ class itemDetails extends Component{
                         <CardImg top width="100%" src="https://a0.muscache.com/im/pictures/e94039b7-fefa-4410-9d05-1feaceddcac5.jpg?im_w=1200"/>
               </div> */}
               
-             
+              <Link to={{
+                            pathname: "/host/editlocation/"+el._id,
+                            state: {
+                                sector: el.sector,
+                                governorate:el.governorate,
+                                maison_dhote:el.maison_dhote,
+                                num:el.num,
+                                email:el.email,
+                                website:el.website,
+                                image:el.image
+                            }
+                            }}>edit</Link>
                 <h1>{el.maison_dhote}</h1>
                 <h3>Spots</h3>
                 <h2>Contact</h2>{el.num? `Num:${el.num}`:null},{el.email? `Email:${el.email}`:null}.

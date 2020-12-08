@@ -33,7 +33,7 @@ const UserSchema=new Schema({
         default:"client"
     },
     ref:{
-        type:String
+        type:Object
     }
 })
 

@@ -18,8 +18,13 @@ const LocationSchema=new Schema({
         default: ''},
     website:{type:String
         ,default: ''},
-    image: {
-        type: String,
+    clicks:{
+        type:Number,
+        default:0
+    },
+    state:{
+        type:String,
+        default:'confirmed'
     },
     date:{
         type:Date,

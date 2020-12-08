@@ -90,6 +90,7 @@ import{clearErrors} from '../../actions/errorActions';
      };
 
      render (){
+        console.log(this.state)
          return(
             
                 <div style={{marginTop:"5%",marginBottom:"5%",marginLeft:"35%"}}>

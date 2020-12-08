@@ -103,7 +103,7 @@ class ShoppingList extends Component{
                    </div>
                     
         <MDBRow>
-            {items.filter(el => el.maison_dhote.toUpperCase().includes(this.state.search.toUpperCase())).filter(el => el.governorate.toUpperCase().includes(this.state.governorate.toUpperCase())).filter(el => el.sector.toUpperCase().includes(this.state.sector.toUpperCase())).map(el =>
+            {items.filter(el => el.maison_dhote.toUpperCase().includes(this.state.search.toUpperCase())).filter(el => el.governorate.toUpperCase().includes(this.state.governorate.toUpperCase())).filter(el => el.sector.toUpperCase().includes(this.state.sector.toUpperCase())).filter(el => el.state==="confirmed").map(el =>
                     <MDBCol lg="4" md="12" className="mb-lg-0 mb-4"  className="cardTag">
                         <MDBView hover className="rounded z-depth-2 mb-4" waves>
                         <img
@@ -139,7 +139,19 @@ class ShoppingList extends Component{
                         <MDBBtn color="danger" onClick={()=>this.onDeleteClick(el._id)} rounded size="md">
                         DELETE
                         </MDBBtn>
-                        <Link to={"/edit/"+el._id}>edit</Link>
+                        <Link to={{
+                            pathname: "/admin/editlocation/"+el._id,
+                            state: {
+                                sector: el.sector,
+                                governorate:el.governorate,
+                                maison_dhote:el.maison_dhote,
+                                num:el.num,
+                                email:el.email,
+                                website:el.website,
+                                clicks:el.clicks,
+                                image:el.image
+                            }
+                            }}>edit</Link>
                     </MDBCol>
             )}
         </MDBRow>
